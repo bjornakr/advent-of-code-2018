@@ -1,37 +1,23 @@
 module D2P1 where
   import Data.List
 
-  -- forTwo :: [Int] -> (Bool, Bool)
-  -- forTwo is = (elem 2 is, elem 3 is)
+  countOccurances :: String -> [Int]
+  countOccurances = (map length) . group . sort
 
-  count :: String -> [Int]
-  count = (map length) . group . sort
+  ofTwoAndThree :: [Int] -> [Int]
+  ofTwoAndThree is = map fromEnum [elem 2 is, elem 3 is]
 
-  occurs :: Int -> [Int] -> Int
-  occurs x = length . (filter ((==) x))
+  occurances :: String -> [[Int]]
+  occurances = (map (ofTwoAndThree . countOccurances)) . words
 
-  occurs2 :: [Int] -> [Int]
-  occurs2 is = map fromEnum [elem 2 is, elem 3 is]
+  calculateProduct :: [[Int]] -> Int
+  calculateProduct is = sumColumn 0 is * sumColumn 1 is
 
-  processInput :: String -> [[Int]]
-  processInput s = map occurs2 (map count (words s))
-
-  -- proc2 :: [[Int]] -> [Int]
-  -- proc2 bb = foldr (\acc cur -> (sum (map head cur)):acc) bb []
-
-  proc3 :: Int -> [[Int]] -> [Int]
-  proc3 n is = ((!!) n) >>= is
-  
-  -- foldr (\acc bs -> ) 0 bb
-    
-    
-    -- length (filter id (map fst bb))
-    -- let
-    --   m = (map length) . group . sort
-    --   n x = length (filter ((==) x) (m input))
-    -- in
-      -- words
-      -- (n 2 + n 3)
+  sumColumn :: Int -> [[Int]] -> Int
+  sumColumn n is = sum (map ((flip (!!)) n) is)
 
   main :: IO ()
-  main = interact (\a -> show (processInput a))
+  main = do
+    interact (show . calculateProduct . occurances)
+    putStrLn ""
+    putStrLn ""
