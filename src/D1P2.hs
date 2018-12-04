@@ -4,6 +4,8 @@ module D1P2 where
   cycleInput :: String -> [Int]
   cycleInput = cycle . (map read) . (map (filter ((/=) '+'))) . words
 
+
+  --scanl
   findDuplicate :: [Int] -> Int
   findDuplicate is = 
     let 
@@ -16,4 +18,4 @@ module D1P2 where
       f is IntSet.empty 0
 
   main :: IO ()
-  main = interact (\input -> show (findDuplicate (cycleInput input)))
+  main = interact (show . findDuplicate . cycleInput)
