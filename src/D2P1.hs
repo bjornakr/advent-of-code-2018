@@ -19,5 +19,3 @@ module D2P1 where
   main :: IO ()
   main = do
     interact (show . calculateProduct . occurances)
-    putStrLn ""
-    putStrLn ""
