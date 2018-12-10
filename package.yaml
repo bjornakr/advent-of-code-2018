@@ -23,6 +23,8 @@ dependencies:
 - base >= 4.7 && < 5
 - containers
 - split
+- text == 1.2.3.1
+- attoparsec
 
 library:
   source-dirs: src/
