@@ -11,5 +11,5 @@ import qualified D3P1 as D3P1
 
 main :: IO ()
 main = do 
-  D3P1.main
+  -- D3P1.main
   putStrLn "\n"
