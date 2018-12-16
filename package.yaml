@@ -25,6 +25,7 @@ dependencies:
 - split
 - text == 1.2.3.1
 - attoparsec
+- array == 0.5.2.0
 
 library:
   source-dirs: src/
