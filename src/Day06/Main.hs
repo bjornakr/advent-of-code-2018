@@ -59,6 +59,23 @@ module Day06.Main where
     in
       fmap (\nc -> Map.insert coord nc grid) newCell
 
+  moveNorth (x, y) = (x, y-1)
+  moveSouth (x, y) = (x, y+1)
+  moveWest (x, y) = (x-1, y)
+  moveEast (x, y) = (x+1, y)
+  moves = [moveNorth, moveSouth, moveWest, moveEast]
+
+  getTargetId :: Cell -> Maybe (TargetId, Distance)
+  getTargetId c = case c of
+    Target tid -> Just (tid, 0)
+    BelongsTo tid dist -> Just (tid, distance)
+    _ -> Nothing
+
+  expand :: Coord -> Grid -> Grid
+  expand coord grid = 
+    case (Map.lookup coord grid) >>= getTargetId of
+      Nothing -> grid
+      Just (tid, dist) -> map (\move -> claim (move coord) tid dist grid) moves -- må folde
 
 
   main = do
